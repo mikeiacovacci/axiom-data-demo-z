@@ -1,0 +1,15 @@
+---
+name: hdiutil
+description: Attaches, verifies, creates, and manipulates disk images
+os: macOS
+ptf_module: null
+---
+commands:
+  - "Attach to FileVault2 Image":
+    - type: ["bash","standalone"]
+    - text: "hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount {FILE}"
+    - input: ["FileVault2 image file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,15 @@
+---
+name: 3snake
+description: Extracts information from newly spawned processes
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Intercept Passwords by Monitoring sshd and sudo System Calls":
+    - type: ["bash","standalone"]
+    - text: "3snake"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,15 @@
+---
+name: mimipenguin
+description: A tool to dump the login password from the current linux user
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Extract Local Cleartext Passwords":
+    - type: ["bash","standalone"]
+    - text: "mimipenguin"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

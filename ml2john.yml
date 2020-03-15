@@ -1,0 +1,15 @@
+---
+name: ml2john
+description: Extracts for formats macOS password hashes for cracking via John
+os: macOS
+ptf_module: null
+---
+commands:
+  - "Scripted macOS Local Hash Extraction for John":
+    - type: ["bash","standalone"]
+    - text: "ml2john.py /var/db/dslocal/nodes/Default/users/{STR}.plist"
+    - input: ["target user"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

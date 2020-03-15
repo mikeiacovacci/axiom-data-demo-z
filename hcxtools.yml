@@ -1,0 +1,22 @@
+---
+name: hcxtools
+description: Portable solution for capturing wlan traffic and conversion to hashcat and John the Ripper formats
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Capture WPA2 PMKID":
+    - type: ["bash","standalone"]
+    - text: "hcxdumptool -i {STR} --filterlist={FILE} --filermode=2 --enable_status=2 -o {FILE}"
+    - input: ["airodump interface name","text file containing target BSSID","output PCAP file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract WPA2 PMKID, Hashcat Format":
+    - type: ["bash","standalone"]
+    - text: "hcxpcaptool -z {FILE} {FILE}"
+    - input: ["output text file","input PCAP file"]
+    - output: ["STDOUT",{"FILE":{"input":1}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

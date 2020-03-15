@@ -1,0 +1,15 @@
+---
+name: pipal
+description: Analyzes cracked password patterns and statistics
+os: Linux
+ptf_module: modules/password-recovery/pipal
+---
+commands:
+  - "Perform Password Frequency Analysis":
+    - type: ["bash","standalone"]
+    - text: "pipal.rb -o {FILE} {FILE}"
+    - input: ["output file","password list file"]
+    - output: ["STDOUT",{"FILE":{"input":1}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

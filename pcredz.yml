@@ -1,0 +1,29 @@
+---
+name: PCredz
+description: Extracts hashes (NTLM, Kerberos, HTTP Basic, SNMP, POP, SMTP, FTP, IMAP, etc.) from PCAPs or live interface
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Extract Hashes from a Single PCAP File":
+    - type: ["bash","standalone"]
+    - text: "Pcredz -f {FILE}"
+    - input: ["input PCAP file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract Hashes from Multiple PCAP Files in a Directory":
+    - type: ["bash","standalone"]
+    - text: "Pcredz -d {STR}"
+    - input: ["directory path"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Listen on an Interface and Extract Hashes from Live Traffic":
+    - type: ["bash","standalone"]
+    - text: "Pcredz -i {STR}"
+    - input: ["interface name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

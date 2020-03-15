@@ -1,0 +1,15 @@
+---
+name: Character Frequency CLI Tool
+description: Python script for character frequency analysis in text documents
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Basic Character Frequency Analysis":
+    - type: ["bash","standalone"]
+    - text: "charfreq.py {FILE}"
+    - input: ["input text file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

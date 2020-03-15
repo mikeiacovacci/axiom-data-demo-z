@@ -1,0 +1,50 @@
+---
+name: creddump
+description: Extracts LM/NT hashes (SYSKEY protected), cached domain passwords, and LSA secrets from Windows registry
+os: Linux
+ptf_module: modules/post-exploitation/creddump7
+---
+commands:
+  - "CACHEDUMP, Windows Vista and 7":
+    - type: ["bash","standalone"]
+    - text: "cachedump.py {FILE} {FILE} true"
+    - input: ["system hive file","security hive file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "CACHEDUMP, Windows XP":
+    - type: ["bash","standalone"]
+    - text: "cachedump.py {FILE} {FILE} false"
+    - input: ["system hive file","security hive file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "LSADUMP, Windows Vista and 7":
+    - type: ["bash","standalone"]
+    - text: "lsadump.py {FILE} {FILE} true"
+    - input: ["system hive file","security hive file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "LSADUMP, Windows XP":
+    - type: ["bash","standalone"]
+    - text: "lsadump.py {FILE} {FILE} false"
+    - input: ["system hive file","security hive file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PWDUMP, Windows Vista and 7":
+    - type: ["bash","standalone"]
+    - text: "pwdump.py {FILE} {FILE} true"
+    - input: ["system hive file","security hive file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PWDUMP, Windows XP":
+    - type: ["bash","standalone"]
+    - text: "pwdump.py {FILE} {FILE} true"
+    - input: ["system hive file","security hive file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

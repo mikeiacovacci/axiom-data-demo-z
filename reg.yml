@@ -1,0 +1,18 @@
+---
+name: reg
+description: Performs operations on registry subkey information and values in registry entries
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Save Registry Hive Tables, Windows XP/Vista/7":
+    - type: ["cmd","standalone"]
+    - text:
+      - "reg save HKLM\\SAM {FILE}"
+      - "reg save HKLM\\SECURITY {FILE}"
+      - "reg save HKLM\\system {FILE}"
+    - input: ["SAM output file","security output file","system output file"]
+    - output: ["STDOUT",{"FILE":{"input":1}},{"FILE":{"input":2}},{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

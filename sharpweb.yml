@@ -1,0 +1,15 @@
+---
+name: SharpWeb
+description: A .NET 2.0 CLR-compliant program that can retrieve saved logins from Chrome, Firefox, and IE/Edge browsers
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Dump Browser Credentials":
+    - type: ["cmd","standalone"]
+    - text: "sharpweb.exe {STRMENU}"
+    - input: [{"target browser":["chrome","firefox","edge","all"]}]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

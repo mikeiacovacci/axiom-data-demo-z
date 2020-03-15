@@ -1,0 +1,213 @@
+---
+name: bash
+description: Common default Linux command shell
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Add Newly Discovered Passwords to Custom Wordlist":
+    - type: ["bash","autonomous"]
+    - text: "awk -F \":\" '{print $2}' {FILE} >> {FILE}"
+    - input: ["hashcat potfile","custom wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract All Lowercase Strings, Output to File":
+    - type: ["bash","autonomous"]
+    - text: "sed 's/[^a-z]*//g' {FILE} > {FILE}"
+    - input: ["input wordlist file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract All Uppercase Strings, Output to File":
+    - type: ["bash","autonomous"]
+    - text: "sed 's/[^A-Z]*//g' {FILE} > {FILE}"
+    - input: ["input wordlist file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract All Lowercase/Uppercase Strings, Output to File":
+    - type: ["bash","autonomous"]
+    - text: "sed 's/[^a-Z]*//g' {FILE} > {FILE}"
+    - input: ["input wordlist file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract All Digits, Output to File":
+    - type: ["bash","autonomous"]
+    - text: "sed 's/[^0-9]*//g' {FILE} > {FILE}"
+    - input: ["input wordlist file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Watch Designated File":
+    - type: ["bash","standalone"]
+    - text: "watch -n .5 tail -50 {FILE}"
+    - input: ["input file to watch"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract 100 Random Samples from File for Visual Analysis":
+    - type: ["bash","standalone"]
+    - text: "shuf -n 100 {FILE}"
+    - input: ["input file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Print String Length Statistics":
+    - type: ["bash","autonomous"]
+    - text: "awk '{print length}' {FILE} | sort -n | uniq -c"
+    - input: ["input file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Count and Remove Duplicate Strings":
+    - type: ["bash","autonomous"]
+    - text: "sort -nr | uniq -c {FILE} | sort -nr"
+    - input: ["input file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Quickly Create a Wordlist from a Specified Website":
+    - type: ["bash","autonomous"]
+    - text: "curl -s {WEBURL} | sed -e 's/<[^>]*>//g' | tr \" \" \"\\n\" | tr -dc '[:alnum:]\\n\\r' | tr '[:upper:]' '[:lower:]' | cut -c 1-15 | sort | uniq -c | sort -nr"
+    - input: ["target website URL"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MD5 Each Line in a File":
+    - type: ["bash","autonomous"]
+    - text: "while read line; do echo -n $line | md5sum; done < {FILE} | awk -F \" \" '{print $1}' > {FILE}"
+    - input: ["input file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract Strings of Specified Length into a New File":
+    - type: ["bash","autonomous"]
+    - text: "awk 'length == {INT}' {FILE} > {FILE}"
+    - input: ["string length","input file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Convert Alpha Characters to Lowercase":
+    - type: ["bash","autonomous"]
+    - text: "tr [A-Z] [a-z] < {FILE} > {FILE}"
+    - input: ["input file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Convert Alpha Characters to Uppercase":
+    - type: ["bash","autonomous"]
+    - text: "tr [a-z] [A-Z] < {FILE} > {FILE}"
+    - input: ["input file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Split a File by Specified Number of Maximum Lines":
+    - type: ["bash","standalone"]
+    - text: "split -d -l {INT} {FILE} {STR}"
+    - input: ["number of lines","input files","output filename prefix"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Reverse Order of Each Character for Each Line in a File":
+    - type: ["bash","autonomous"]
+    - text: "rev {FILE} > {FILE}"
+    - input: ["input file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Sort Lines in a File from Shortest to Longest":
+    - type: ["bash","autonomous"]
+    - text: "awk '{print length,$0}' \" \" $0; }' {FILE} | sort -n | cut -d ' ' -f2-"
+    - input: ["input file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Sort Lines in a File from Longest to Shortest":
+    - type: ["bash","autonomous"]
+    - text: "awk '{print length,$0}' \" \" $0; }' {FILE} | sort -r -n | cut -d ' ' -f2-"
+    - input: ["input file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Remove Newlines and Tabs from Text File":
+    - type: ["bash","autonomous"]
+    - text: "cat {FILE} | tr -cd \"[:print:][/n/t]\\n\" > {FILE}"
+    - input: ["input text file","output text file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Remove Binary Data from Text File":
+    - type: ["bash","autonomous"]
+    - text: "tr -cd '\\11\\12\\15\\40-\\176' < {FILE} > {FILE}"
+    - input: ["input text file","output text file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "View Local Password Hashes":
+    - type: ["bash","standalone"]
+    - text: "cat /etc/shadow"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract LUKS Volume Header":
+    - type: ["bash","standalone"]
+    - text: "dd if={STR} of={FILE} bs=512 count=4097"
+    - input: ["LUKS partition","output .dd file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract TrueCrypt or VeraCrypt Volume Header":
+    - type: ["bash","standalone"]
+    - text: "dd if={STR} of={FILE} bs=1 skip=31744 count=512"
+    - input: ["TrueCrypt or VeraCrypt volume","output .dd file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract TrueCrypt or VeraCrypt Hidden Partition Header":
+    - type: ["bash","standalone"]
+    - text: "dd if={STR} of={FILE} bs=1 skip=65536 count=512"
+    - input: ["TrueCrypt or VeraCrypt hidden partition","output .dd file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract Hash from TrueCrypt or VeraCrypt Encrypted File":
+    - type: ["bash","standalone"]
+    - text: "dd if={STR} of={FILE} bs=512 count=1"
+    - input: ["TrueCrypt or VeraCrypt encrypted file","output .dd file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract BitLocker of FileVault2 Encrypted Image":
+    - type: ["bash","standalone"]
+    - text: "dd if=/dev/{STR} of={FILE} conv=noerror,sync"
+    - input: ["disk name","output image file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Obtain macOS EncryptedRoot.plist.wipekey from Recover HD Partition":
+    - type: ["bash","autonomous"]
+    - text:
+      - "mmls {FILE}"
+      - "icat -o 50480752 {FILE} > {FILE}"
+    - input: ["FileVault .dd file","FileVault .dd file (repeat)","output .plist.wipekey file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Convert Hashcat $HEX[] Entries to ASCII":
+    - type: ["bash","autonomous"]
+    - text: "grep '$HEX' {FILE} | awk -F \":\" {'print $2'} | perl -ne 'if ($_ =~m/\\$HEX\\[([A-Fa-f0-9]+)\\]/) {print pack(\"H*\", $1), \"\\n\"}'"
+    - input: ["hashcat .pot file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Exit bash":
+    - type: ["bash","interactive"]
+    - text: "exit"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"bash"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

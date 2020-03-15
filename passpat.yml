@@ -1,0 +1,15 @@
+---
+name: Passpat
+description: Keyboard pattern analysis tool for passwords
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Analyze Passwords for Keyboard Patterns":
+    - type: ["bash","standalone"]
+    - text: "passpat.rb --layout us {FILE}"
+    - input: ["password list file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

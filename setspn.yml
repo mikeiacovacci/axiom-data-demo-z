@@ -1,0 +1,15 @@
+---
+name: setspn
+description: Reads, modifies, and deletes Service Principal Names (SPN) property for Active Directory service accounts
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Manually Enumerate SPNs":
+    - type: ["cmd","standalone"]
+    - text: "setspn -t {DOMAIN} -q */*"
+    - input: ["target domain"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

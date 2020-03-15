@@ -1,0 +1,22 @@
+---
+name: Kubernetes
+description: An open-source system for automating deployment, scaling, and management of containerized applications
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Show Stored Kubernetes Secrets":
+    - type: ["bash","standalone"]
+    - text: "kubectl get secrets"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Query a Stored Kubernetes Secret":
+    - type: ["bash","standalone"]
+    - text: "kubectl describe secrets/{STR}"
+    - input: ["secret name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

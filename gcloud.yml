@@ -1,0 +1,29 @@
+---
+name: gcloud
+description: Google Cloud SDK tool for performing event publishing/subscription operations
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Set the Obtained Target Credentials in Configuration":
+    - type: ["bash","standalone"]
+    - text: "gcloud config set account {STR}"
+    - input: ["account"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Execute Scout using a User Account":
+    - type: ["bash","standalone"]
+    - text: "python Scout.py --provider gcp --user-account"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Execute Scout using a Service Account":
+    - type: ["bash","standalone"]
+    - text: "python Scout.py --provider gcp --service-account --key-file {FULLPATH}"
+    - input: ["key file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

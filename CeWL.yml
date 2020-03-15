@@ -1,0 +1,15 @@
+---
+name: CeWL
+description: Spiders a URL (to specified depth) and returns a list of words for password guessing
+os: Linux
+ptf_module: modules/password-recovery/cewl
+---
+commands:
+  - "Retrieve Keywords by Scraping Target Website":
+    - type: ["bash","standalone"]
+    - text: "cewl -d {INT} -m {INT} -w {FILE} {WEBURL}"
+    - input: ["spider depth","minimum word length","output wordlist file","target URL"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

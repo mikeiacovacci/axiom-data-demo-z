@@ -1,0 +1,15 @@
+---
+name: net
+description: Manage network resources and perform operations on groups, users, account policies, shares, etc.
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Map Live Sysinternals Tools":
+    - type: ["cmd","standalone"]
+    - text: "net use {STR}: \\\\live.sysinternals.com\\tools\\ \"/user:\""
+    - input: ["desired drive letter"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

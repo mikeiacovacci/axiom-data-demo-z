@@ -1,0 +1,15 @@
+---
+name: pacu
+description: AWS exploitation framework designed for testing the security of Amazon Web Services environments
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Enumerate AWS Access":
+    - type: ["bash","standalone"]
+    - text: "python3 pacu.py"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

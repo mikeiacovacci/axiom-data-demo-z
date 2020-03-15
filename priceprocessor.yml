@@ -1,0 +1,29 @@
+---
+name: princeprocessor
+description: Standalone password candidate generator using the PRINCE algorithm
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Attack Slow Hashes":
+    - type: ["bash","standalone"]
+    - text: "pp64.bin {FILE}"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Amplified Attack for Fast Hashes":
+    - type: ["bash","standalone"]
+    - text: "pp64.bin --case-permute {FILE}"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Double PRINCE Attack":
+    - type: ["bash","autonomous"]
+    - text: "pp64.bin {FILE} | pp64.bin"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,15 @@
+---
+name: docker
+description: A platform for developers and sysadmins to develop, deploy, and run applications with containers
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Show Docker Secret Locations":
+    - type: ["bash","standalone"]
+    - text: "docker secret ls"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

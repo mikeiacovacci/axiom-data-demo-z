@@ -1,0 +1,15 @@
+---
+name: WiFiProfileManagement
+description: PowerShell tool that leverages native Windows WiFi functions to view local WiFi passwords
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Dump Stored Cleartext WiFi Password":
+    - type: ["powershell","standalone"]
+    - text: "Get-WiFiProfile -ProfileName {STR} -ClearKey"
+    - input: ["target WiFi profile name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

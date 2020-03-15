@@ -1,0 +1,29 @@
+---
+name: The Volatility Framework
+description: Collection of Python tools for extracting digital artifacts from volatile memory (RAM) samples
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Get Info from VM Memory Dump File":
+    - type: ["cmd","standalone"]
+    - text: "volatility_2.6_x64.exe imageinfo -f {FILE}"
+    - input: ["input .dmp file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Get SYSTEM and SAM Registry Hive Locations from VM Memory Dump File":
+    - type: ["cmd","standalone"]
+    - text: "volatility_2.6_x64.exe hivelist -f {FILE} --profile={STR}"
+    - input: ["input .dmp file","volatility profile type name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Retrieve User Account Hashes from VM Memory Dump File via Registry Extraction":
+    - type: ["cmd","standalone"]
+    - text: "volatility_2.6_x64.exe hashdump -f {FILE} --profile={STR} sys-offset={STR} sam-offset={STR}"
+    - input: ["input .dmp file","volatility profile type name","SYSTEM hive memory offset","SAM hive memory offset"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

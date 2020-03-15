@@ -1,0 +1,64 @@
+---
+name: Password Analysis and Cracking Kit (PACK)
+description: Password list analysis utilities featuring pattern detection of masks, rules, character-sets, etc.
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Statistically Analyze Passwords and Output Mask File":
+    - type: ["bash","standalone"]
+    - text: "python statsgen.py {FILE} -o {FILE}"
+    - input: ["password list file","output mask file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Statistically Analyze Passwords of Specified Mimimum Length and Ouput Mask File":
+    - type: ["bash","standalone"]
+    - text: "python statsgen.py {FILE} --hiderare --minlength={INT} -o {FILE}"
+    - input: ["password list file","minimum password length","output mask file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Statistically Analyze Numeric-only Passwords":
+    - type: ["bash","standalone"]
+    - text: "python statsgen.py {FILE} --charset=numeric"
+    - input: ["password list file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Analyze Mask File":
+    - type: ["bash","standalone"]
+    - text: "python maskgen.py {FILE}"
+    - input: ["mask file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Create Time-bound Mask Attack based on Cracking Speed":
+    - type: ["bash","standalone"]
+    - text: "python maskgen.py {FILE} --targettime={INT} --optindex --pps={INT} -q"
+    - input: ["mask file","duration, in seconds","GPU cracking speed, c/s"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Output Time-bound Mask Attack to .hcmask File for Hashcat":
+    - type: ["bash","standalone"]
+    - text: "python maskgen.py {FILE} --targettime={INT} --optindex --pps={INT} -q -o {FILE}"
+    - input: ["mask file","duration, in seconds","GPU cracking speed, c/s","output .hcmask file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Generate Mask Attack for Specified Password Policy Details":
+    - type: ["bash","standalone"]
+    - text: "python policygen.py --minlength {INT} --maxlength {INT} --minlower {INT} --minupper {INT} --mindigit {INT} --minspecial {INT} -o {FILE}"
+    - input: ["minimum length","maximum length","minimum lowercase characters","minimum uppercase characters","minimum digits","minimum special characters","output .hcmask file"]
+    - output: ["STDOUT",{"FILE":{"input":7}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Generate Mask Attack and Estimate Time of Completion based on Cracking Speed":
+    - type: ["bash","standalone"]
+    - text: "python policygen.py --minlength {INT} --maxlength {INT} --minlower {INT} --minupper {INT} --mindigit {INT} --minspecial {INT} -o {FILE} --pps={INT}"
+    - input: ["minimum length","maximum length","minimum lowercase characters","minimum uppercase characters","minimum digits","minimum special characters","output .hcmask file","GPU cracking speed, c/s"]
+    - output: ["STDOUT",{"FILE":{"input":7}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

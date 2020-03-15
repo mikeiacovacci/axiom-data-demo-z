@@ -1,0 +1,22 @@
+---
+name: truffleHog
+description: Searches through git repositories for accidentally-committed secrets by quering commit history and branches
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Search Live Git Repo for Exposed Secrets":
+    - type: ["bash","standalone"]
+    - text: "truffleHog --regex --entropy=False {HTTPSURL}"
+    - input: ["target git repo HTTPS URL"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Search Local Git Repo for Exposed Secrets":
+    - type: ["bash","standalone"]
+    - text: "truffleHog file://{FULLPATH}"
+    - input: ["local git repo path"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

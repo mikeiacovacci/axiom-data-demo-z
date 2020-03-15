@@ -1,0 +1,15 @@
+---
+name: lyricpass
+description: Password wordlist generator using song lyrics for targeted bruteforce attacks
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Generate Lyric-based Wordlist by Specified Artist":
+    - type: ["bash","standalone"]
+    - text: "python lyricpass.py \"{STR}\" {FILE}"
+    - input: ["artist name","artist dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

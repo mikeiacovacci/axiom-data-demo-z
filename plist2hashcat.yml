@@ -1,0 +1,15 @@
+---
+name: plist2hashcat
+description: Converts Mac plist (SALTED-SHA512-PBKDF2) to password hash for hashcat
+os: macOS
+ptf_module: null
+---
+commands:
+  - "Scripted macOS Local Hash Extraction, OS X 10.8 and later":
+    - type: ["bash","standalone"]
+    - text: "plist2hashcat.py /var/db/dslocal/nodes/Default/users/{STR}.plist"
+    - input: ["target user"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

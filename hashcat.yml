@@ -1,0 +1,764 @@
+---
+name: hashcat
+description: The world’s fastest CPU-based password recovery tool
+os: Linux
+ptf_module: modules/password-recovery/hashcat
+---
+commands:
+  - "Benchmark":
+    - type: ["bash","standalone"]
+    - text: "hashcat -b"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Wordlist + Rules Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE} -r {FILE} --loopback"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","wordlist file","rule file name"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Mask Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","hashcat mask file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Hybrid Dictionary + Appended Mask Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","wordlist file","hashcat mask file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Hybrid Dictionary + Prepended Mask Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","hashcat mask file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Combo Dictionary Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","1st wordlist file","2nd wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Custom Mask Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","custom hashcat mask file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Standard Buteforce Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -w {INT} {FILE} -i {STR}"
+    - input: ["attack mode number","hash type number","workload profile number","hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Rules Attack, Maipulate Left":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} {FILE} {FILE} {FILE} -j"
+    - input: ["attack mode number","hash type number","hash file","1st wordlist file","2nd wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Rules Attack, Maipulate Right":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} {FILE} {FILE} {FILE} -k"
+    - input: ["attack mode number","hash type number","hash file","1st wordlist file","2nd wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Mask Attack, Minimum Increment Length":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} {FILE} {STR} --increment-min={INT}"
+    - input: ["attack mode number","hash type number","hash file","mask string","increment minimum"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Mask Attack, Maximum Increment Length":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} {FILE} {STR} --increment-max={INT}"
+    - input: ["attack mode number","hash type number","hash file","mask string","increment maximum"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Benchmark Specified Hash Type":
+    - type: ["bash","standalone"]
+    - text: "hashcat -b -m {INT}"
+    - input: ["hash type number"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Show Example of Specified Hash Type":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m {INT} --example-hashes"
+    - input: ["hash type number"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Show Keyspace":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} --keyspace {FILE} {FILE} -r {FILE}"
+    - input: ["attack mode number","hash type number","hash file","wordlist file","rules file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Keyboard Layout Mapping":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} --keyb={STR}.hckmap {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","keyboard language","hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Hashcat Brain (server)":
+    - type: ["bash","standalone"]
+    - text: "hashcat --brain-server"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Hashcat Brain (client)":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a {INT} -m {INT} -z --brain-password {STR} {FILE} {FILE}"
+    - input: ["attack mode number","hash type number","brain password","hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Crack WPA2 PMKID (from hcxtools)":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a 0 -m 16800 -w {INT} {FILE} {FILE}"
+    - input: ["workload profile number","text file containing hash","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Crack Target SPNs":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a 0 -m {INTMENU} -w {INT} {FILE} {FILE}"
+    - input: [{"kerberos hash type number":["13100","18200"]},"workload profile number","input file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Crack IPMI Hashes":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a 0 -m 7300 {FILE} {FILE}"
+    - input: ["input file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Crack LUKS Header File":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a o -m 14600 {FILE} {FILE}"
+    - input: ["LUKS header file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Combine Two Wordlists Appending Both Words":
+    - type: ["bash","autonomous"]
+    - text: "comnbinator.bin {FILE} {FILE} > {FILE}"
+    - input: ["1st dictionary file","2nd dictionary file","output dictionary file"]
+    - output: ["STDOUT",{"FILE":{"input":3}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Combine Three Wordlists Appending Three Words":
+    - type: ["bash","autonomous"]
+    - text: "comnbinator.bin {FILE} {FILE} {FILE} > {FILE}"
+    - input: ["1st dictionary file","2nd dictionary file","3rd dictionary file","output dictionary file"]
+    - output: ["STDOUT",{"FILE":{"input":4}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cut Specified Number of Characters from Wordlist":
+    - type: ["bash","autonomous"]
+    - text: "cutb.bin {INT} {INT} < {FILE} > {FILE}"
+    - input: ["offset","number of characters to cut","input dictionary file","output file"]
+    - output: ["STDOUT",{"FILE":{"input":4}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Compare Dictionary File to Another to Remove Duplicates":
+    - type: ["bash","standalone"]
+    - text: "rli {FILE} {FILE} {FILE}"
+    - input: ["1st dictionary file","output file","2nd dictionary file"]
+    - output: ["STDOUT",{"FILE":{"input":2}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Create Unique Combinations of Custom Dictionary":
+    - type: ["bash","standalone"]
+    - text: "combipow.bin {FILE}"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Create Unique Combinations of Custom Dictionary, 15 Character Maximum":
+    - type: ["bash","standalone"]
+    - text: "combipow.bin -l {FILE}"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Split Dictionary into Single Characters (up to 4)":
+    - type: ["bash","autonomous"]
+    - text: "expander.bin < {FILE}"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Filter Dictionary by Word Length Range":
+    - type: ["bash","autonomous"]
+    - text: "len.bin {INT} {INT} < {FILE}"
+    - input: ["minimum word length","maximum word length","dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Generate Insertion Rules for the Most Frequent Chain of Characters":
+    - type: ["bash","standalone"]
+    - text: "morph.bin {FILE} {INT} {INT} {INT} {INT}"
+    - input: ["dictionary file","depth","width","min_pos","max_pos"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Run The Countdown QuickPerm Algorithm on Dictionary File":
+    - type: ["bash","autonomous"]
+    - text: "permute.bin < {FILE}"
+    - input: ["dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Generate Wordlist by Character Set, Exhaustive Permutations":
+    - type: ["bash","standalone"]
+    - text: "crunch {INT} {INT} {STR} -o {FILE}"
+    - input: ["minimum word length","maximum word length","character set string","output file"]
+    - output: ["STDOUT",{"FILE":{"input":4}}]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Generate Hashes for Specified Algorithm":
+    - type: ["bash","standalone"]
+    - text: "test.pl passthrough {STR} {INT} {FILE}"
+    - input: ["hash type","type number","dictionary file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Force Internal Wordlist Encoding":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a o -m {STR} {FILE} {FILE} --encoding-{STRMENU}={STR}"
+    - input: ["hash type","hash file","dictionary file",{"encoding direction":["from","to"]},"encoding type"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MD5 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 0 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MD5 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 0 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MD5 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 0 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "NTLM Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1000 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "NTLM Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1000 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "NTLM Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1000 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "NTLMv2 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 5600 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "NTLMv2 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 5600 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "NTLMv2 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 5600 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "LM Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 3000 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "LM Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 3000 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "LM Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 3000 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "md5crypt Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 500 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "md5crypt Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 500 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "md5crypt Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 500 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "SHA1 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 100 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "SHA1 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 100 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "SHA1 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 100 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "SHA256 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1400 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "SHA256 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1400 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "SHA256 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1400 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "bcrypt Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 3200 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "bcrypt Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 3200 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "bcrypt Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 3200 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PDF 1.4-1.6 (Acrobat 5-8) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 10500 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PDF 1.4-1.6 (Acrobat 5-8) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 10500 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PDF 1.4-1.6 (Acrobat 5-8) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 10500 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Microsoft Office 2013 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9600 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Microsoft Office 2013 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9600 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Microsoft Office 2013 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9600 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "RAR3-hp (Encrypted Header) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 12500 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "RAR3-hp (Encrypted Header) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 12500 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "RAR3-hp (Encrypted Header) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 12500 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "WinZip Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 13600 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "WinZip Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 13600 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "WinZip Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 13600 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "7-Zip Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 11600 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "7-Zip Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 11600 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "7-Zip Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 11600 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Bitcoin/Litecoin Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 11300 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Bitcoin/Litecoin Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 11300 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Bitcoin/Litecoin Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 11300 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "macOS 10.8-10.12 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 122 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "macOS 10.8-10.12 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 122 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "macOS 10.8-10.12 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 122 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MySQL 4.1/5+ (Double SHA1) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 300 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MySQL 4.1/5+ (Double SHA1) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 300 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MySQL 4.1/5+ (Double SHA1) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 300 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PostgreSQL Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 12 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PostgreSQL Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 12 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "PostgreSQL Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 12 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MSSQL 2012/2014 Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1731 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MSSQL 2012/2014 Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1731 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "MSSQL 2012/2014 Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 1731 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Oracle Database 11g Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 112 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Oracle Database 11g Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 112 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Oracle Database 11g Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 112 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 4 (SHA256) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 112 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 4 (SHA256) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 112 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 4 (SHA256) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 112 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 5 (MD5) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 500 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 5 (MD5) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 500 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 5 (MD5) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 500 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 8 (PBKDF2+SHA256) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9200 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 8 (PBKDF2+SHA256) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9200 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 8 (PBKDF2+SHA256) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9200 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 9 (scrypt) Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9300 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 9 (scrypt) Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9300 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Cisco Type 9 (scrypt) Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 9300 -a 0 {FILE} {FILE} -r {FILE}"
+    - input: ["hash file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "WPA/WPA2 PSK Brute Force Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 2500 -a 3 {FILE} {STR}"
+    - input: ["hash file","mask string"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "WPA/WPA2 PSK Wordlist Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -m 2500 -a 0 {FILE} {FILE}"
+    - input: ["hash file","wordlist file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "WPA/WPA2 PSK Wordlist + Rule Attack":
+    - type: ["bash","standalone"]
+    - text: "hashcat -a 0 {FILE} {FILE} -r {FILE}"
+    - input: [".hccapx file","wordlist file","rule file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

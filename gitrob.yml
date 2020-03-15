@@ -1,0 +1,15 @@
+---
+name: gitrob
+description: Finds potentially sensitive files pushed to public repositories on Github
+os: Linux
+ptf_module: null
+---
+commands:
+  - "Analyze Live GitHub Repo for Sensitive Files":
+    - type: ["bash","standalone"]
+    - text: "gitrob analyze {STR} --site={HTTPSURL} --endpoint={HTTPSURL} --access-tokens={STR}"
+    - input: ["username","target GitHub repo HTTPS URL","API endpoint URL","access tokens, comma-separated"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

